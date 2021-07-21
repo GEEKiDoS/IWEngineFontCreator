@@ -1,0 +1,93 @@
+﻿<Window x:Class="IWEngineFontCreator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IWEngineFontCreator"
+        mc:Ignorable="d"
+        Title="IWEngine Font Generator" Height="522" Width="785" ResizeMode="CanResize" Closing="OnClosing">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="75"></RowDefinition>
+			<RowDefinition Height="24"></RowDefinition>
+			<RowDefinition Height="36"></RowDefinition>
+			<RowDefinition Height="1*"></RowDefinition>
+			<RowDefinition Height="45"></RowDefinition>
+		</Grid.RowDefinitions>
+		<Grid x:Name="gPreview" Background="Black" Grid.Row="0"/>
+		<TextBlock VerticalAlignment="Center" Margin="10,0,10,0" HorizontalAlignment="Left" Text="Render Preview" TextWrapping="Wrap" Grid.Row="1"/>
+		<TextBox x:Name="iMessage" VerticalContentAlignment="Center" Margin="10,0,10,0" Padding="7,7,7,7" Text="Hello Here!" TextWrapping="Wrap" TextChanged="RefreshTextPreview" Grid.Row="2"/>
+		<Grid Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="1*"></ColumnDefinition>
+				<ColumnDefinition Width="2*"></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="24"></RowDefinition>
+					<RowDefinition Height="1*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<TextBlock HorizontalAlignment="Left" Margin="10,5,5,5" Text="Generated Texture" TextWrapping="Wrap" VerticalAlignment="Top"/>
+				<Border Background="Black" Margin="10,0,5,10" Grid.Row="1">
+					<Image x:Name="imDisplay" Stretch="None" MouseDown="TogglePreviewMode" RenderOptions.BitmapScalingMode="Fant"/>
+				</Border>
+			</Grid>
+			<Grid Grid.Column="1" Margin="5,5,5,5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1*"></ColumnDefinition>
+					<ColumnDefinition Width="1*"></ColumnDefinition>
+					<ColumnDefinition Width="1*"></ColumnDefinition>
+					<ColumnDefinition Width="1*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="1*"></RowDefinition>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Vertical" Grid.Column="0">
+					<TextBlock Margin="10,11,10,11">Name</TextBlock>
+					<TextBlock Margin="10,11,10,11">Texture Width</TextBlock>
+					<TextBlock Margin="10,11,10,11">X Oversample</TextBlock>
+					<TextBlock Margin="10,11,10,11">Encoding</TextBlock>
+				</StackPanel>
+				<StackPanel Orientation="Vertical" Grid.Column="1">
+					<TextBox x:Name="iName" Margin="5,5,5,5" Padding="5,5,5,5">myFont</TextBox>
+					<TextBox x:Name="iWidth" Margin="5,5,5,5" Padding="5,5,5,5" Text="512"/>
+					<TextBox x:Name="iXos" Margin="5,5,5,5" Padding="5,5,5,5">1</TextBox>
+					<TextBox x:Name="iEncoding" Margin="5,5,5,5" Padding="5,5,5,5">GBK</TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Vertical" Grid.Column="2">
+					<TextBlock Margin="10,11,10,11">Size</TextBlock>
+					<TextBlock Margin="10,11,10,10">Texture Height</TextBlock>
+					<TextBlock Margin="10,11,10,11">Y Oversample</TextBlock>
+					<TextBlock Margin="10,11,10,10">Font file</TextBlock>
+				</StackPanel>
+				<StackPanel Orientation="Vertical" Grid.Column="3">
+					<TextBox x:Name="iSize" Margin="5,5,5,5" Padding="5,5,5,5">18</TextBox>
+					<TextBox x:Name="iHeight" Margin="5,5,5,5" Padding="5,5,5,5" Text="512"/>
+					<TextBox x:Name="iYos" Margin="5,5,5,5" Padding="5,5,5,5">1</TextBox>
+					<Button x:Name="bFile" Margin="5,5,5,5" Padding="5,5,5,5" Click="SelectFont">Select</Button>
+				</StackPanel>
+				<Grid Margin="5,5,5,5" Grid.Row="1" Grid.ColumnSpan="4">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="95*"></ColumnDefinition>
+						<ColumnDefinition Width="5*"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="24"></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center">Glyph Ranges</TextBlock>
+					<ListBox x:Name="lRange" Grid.Column="0" Grid.Row="1"></ListBox>
+					<StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+						<Button Margin="2,2,0,2" Padding="3,0,3,0" Click="AddRange">+</Button>
+						<Button Margin="2,2,0,2" Padding="3,0,3,0" Click="RemoveRange">-</Button>
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</Grid>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,5,5,5" Grid.Row="4">
+			<Button Margin="5,5,5,5" Padding="5,5,5,5" Click="GenerateFont">Generate</Button>
+			<Button Margin="5,5,5,5" Padding="5,5,5,5" Click="SaveFont">Save</Button>
+		</StackPanel>
+	</Grid>
+</Window>
